@@ -9,10 +9,10 @@ def menu(request):
 
 def menu_order(request, pk):    
     restaurant = Restaurant.objects.get(pk = pk)
-    categories = []
+    categories = [] 
     if restaurant:
-        categories = Category.objects.filter(restaurant = pk)        
-        products = Product.objects.filter(category__restaurant = pk)
+        categories = Category.objects.filter(restaurant = pk, visible = True)        
+        products = Product.objects.filter(category__restaurant = pk, visible = True)
       
     return render(request, 'restaurant/menu_restaurant.html', {'restaurant':restaurant, 'categories':categories, 'products':products})
 
@@ -53,11 +53,9 @@ def processing_orders(request, pk):
     restaurant = Restaurant.objects.get(pk = pk)
     
     if restaurant :
-        orders = Order.objects.filter(restaurant = pk, state__in = ['ESPERA', 'PREPARACION'] )
+        orders = Order.objects.filter(restaurant = pk, state__in = ['ESPERA', 'PREPARACION'] ).order_by('-created_date')
         productOrders = ProductOrder.objects.filter(order__restaurant__pk = pk, order__state__in = ['ESPERA', 'PREPARACION']  )
 
-        print('orders',orders)
-        
-        print('productOrders',productOrders)
+
     return render(request, 'restaurant/processing_orders.html', {'orders':orders, 'productOrders':productOrders, 'restaurant':restaurant})
 

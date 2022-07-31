@@ -32,3 +32,14 @@ img {
     margin-top: 10px;
     margin-left: 10px;
 }
+
+.restaurant{
+    margin-bottom: 10px;
+}
+.order{
+    margin-top: 10px;
+}
+
+body {
+    background-color: hsl(174, 100%, 38%) ;
+}

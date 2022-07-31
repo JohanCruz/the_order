@@ -11,18 +11,60 @@
         {% if not restaurant %}
         Restaurante no encontrado
         {% else %}
-         
-        {{restaurant.name}}
+        
+        <div class="restaurant">            
+           Ordenes {{restaurant.name}}
+        </div>
 
         {% for order in orders %}
 
-        {{order.name}}
+        <div class="Order">
+        </div>
 
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col"># Orden </th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Empaque</th>
+                <th scope="col">Estado</th>
+            </tr>
+            </thead>        
+            
             {% for productOrder in productOrders %}
+                
+            
+                {% if productOrder.order.pk == order.pk %}
 
-            {{productOrder.product}} {{productOrder.quantity}}
+                    
+                <tbody>
+                    <tr>
+                        <td>{{order.pk}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{productOrder.product}}</td>
+                        <td>{{productOrder.quantity}}</td>
+                        
+                        
+                        
+                        
+                    
+                    {% if productOrder.carry_off %}
+                        <td>Para Llevar</td>  
+                    {% else %}                      
+                        <td>Mesa</td>
+                    {% endif %}                         
+                        <td>{{productOrder.state}}</td> 
+                    </tr>
+                </tbody>
+              
+                    
+                {% endif %}
 
             {% endfor %}
+        </table>
+        
 
 
         {% endfor %}
