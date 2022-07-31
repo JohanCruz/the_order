@@ -1,0 +1,22 @@
+{% load static %}
+<html> 
+    <head>
+        <title>The Order</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'restaurant/css/menu.css' %}">
+    </head>   
+<body>
+    <h1>Restaurantes</h1>
+    {% for restaurant in restaurants %}
+    <div>        
+        <h2><a href="menu/{{ restaurant.id }}">{{ restaurant.name }}</a></h2>
+        
+        <a href="menu/{{ restaurant.id }}">
+            <img class="logo" src="{% static media %}{{ restaurant.logo }}">
+        </a>
+        
+    </div>
+    {% endfor %}
+</body>
+</html>

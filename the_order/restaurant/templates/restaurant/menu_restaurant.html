@@ -1,0 +1,97 @@
+{% load static %}
+<html> 
+    <head>
+        <title>The Order</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'restaurant/css/menu.css' %}">
+    </head>   
+<body>
+    {% if restaurant  %}
+    
+    <a href="">
+        <h1>Restaurante</h1>
+    </a>    
+    
+    <div>        
+        <h2>{{ restaurant.name }}</h2>        
+        
+            <img class="logo" src="{% static media %}{{ restaurant.logo }}">        
+        
+    </div>
+    
+    
+    {% if categories %}
+        <h2>Menú</h2>
+     
+    
+
+    {% for category in categories %}
+    <div>        
+        <h2>{{ category.name }}</h2>
+        
+        <img class="logo" src="{% static media %}{{ category.image }}">       
+
+    </div>
+
+    <form action="/order/{{ restaurant.pk }}/" method="post" class="post-form">
+        
+        {% csrf_token %}       
+
+
+        {% for product in products %}
+
+            {% if product.category.pk ==  category.pk and  product.visible  %}
+            <p class="order">
+
+             {{ product.name }}, {{ product.description }}, ${{ product.price }}      
+
+                {% if not product.available %}
+
+                    No disponible
+
+                {% else %}
+
+            
+                <input class="input-number" type="number" id="{{product.pk}}" name="{{product.pk}}"
+                min="0" max="100" value=0>
+            
+            </p>
+
+                <div class="form-check" >
+                    <input class="form-check-input" type="checkbox" value="carry" id="carry_off_{{product.pk}}" name="carry_off_{{product.pk}}">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      llevar?
+                    </label>
+                </div>
+
+                {% endif %} 
+                    
+            
+            {% endif %}    
+
+
+        {% endfor %}
+
+
+    {% endfor %}
+
+    <label for="description">Nombre del cliente:</label>
+    <input type="text" id="name_of_person" name="name_of_person">
+        
+    <br>
+
+    <label for="description">Nota:</label>
+
+        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+
+    <input type="submit" value="Crear pedido">
+
+    </form>
+    
+    {% endif %}
+   
+    {% endif %}
+</body>
+</html>

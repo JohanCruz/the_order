@@ -1,0 +1,33 @@
+{% load static %}
+<html> 
+    <head>
+        <title>The Order</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'restaurant/css/menu.css' %}">
+    </head>   
+    <body>
+        {% if not restaurant %}
+        Restaurante no encontrado
+        {% else %}
+         
+        {{restaurant.name}}
+
+        {% for order in orders %}
+
+        {{order.name}}
+
+            {% for productOrder in productOrders %}
+
+            {{productOrder.product}} {{productOrder.quantity}}
+
+            {% endfor %}
+
+
+        {% endfor %}
+
+        {% endif %}
+
+    </body>
+</html>

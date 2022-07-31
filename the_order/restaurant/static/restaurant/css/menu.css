@@ -1,0 +1,34 @@
+h1 a, h2 a {
+    color: #C25100;
+}
+
+img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 130px;
+    margin-top: -10px;
+    margin-bottom: 25px;
+  }
+
+.input-number{
+    width: 40px;
+}
+
+.order {
+    width: 500px;
+}
+
+
+.form-check {
+    background-color: aquamarine;
+    width: 90px;
+    display: flex;
+    margin-top: -41px;
+    margin-left: 420px;
+}
+
+.form-check-label { 
+    margin-top: 10px;
+    margin-left: 10px;
+}
