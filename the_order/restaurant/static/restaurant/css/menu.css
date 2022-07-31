@@ -43,3 +43,8 @@ img {
 body {
     background-color: hsl(174, 100%, 38%) ;
 }
+
+.description {
+    background-color: hsl(58, 75%, 64%) ;
+    margin-top: -20px;
+}

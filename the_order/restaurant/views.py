@@ -2,6 +2,8 @@ from itertools import product
 from unicodedata import category
 from django.shortcuts import render, redirect
 from .models import Category, Restaurant, Product, Order, ProductOrder
+from django.http import JsonResponse
+
 
 def menu(request):
     restaurants = Restaurant.objects.all()
@@ -59,3 +61,19 @@ def processing_orders(request, pk):
 
     return render(request, 'restaurant/processing_orders.html', {'orders':orders, 'productOrders':productOrders, 'restaurant':restaurant})
 
+
+
+def change_status(request, pk, status,restaurant):
+    
+    productOrder = ProductOrder.objects.get(pk= pk)
+    if productOrder:
+        productOrder.state = status
+        if status in ['ESPERA', 'PREPARACION', 'FINALIZADO']:
+            productOrder.save()
+            response = redirect('/processing/' + str(restaurant))
+            return response
+            
+        else :
+            return JsonResponse({'message':'status incorrect'})    
+    
+    return JsonResponse({'message':'Something was wrong'})
